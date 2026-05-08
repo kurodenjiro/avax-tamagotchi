@@ -3,10 +3,7 @@ pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
-
 contract Tamagotchi is ERC721Enumerable, Ownable {
-    using Strings for uint256;
 
     struct Pet {
         string name;
@@ -16,6 +13,9 @@ contract Tamagotchi is ERC721Enumerable, Ownable {
         uint256 health;      // 0-100 (100 is healthy, 0 is dead/sick)
         uint256 lastInteraction;
         uint256 birthTime;
+        uint8 body;
+        uint8 ear;
+        uint8 face;
     }
 
     mapping(uint256 => Pet) public pets;
@@ -31,7 +31,7 @@ contract Tamagotchi is ERC721Enumerable, Ownable {
 
     constructor() ERC721("AvaxTamagotchi", "AVXT") Ownable(msg.sender) {}
 
-    function mint(string memory _name) public {
+    function mint(string memory _name, uint8 _body, uint8 _ear, uint8 _face) public {
         uint256 tokenId = nextTokenId++;
         _safeMint(msg.sender, tokenId);
 
@@ -42,7 +42,10 @@ contract Tamagotchi is ERC721Enumerable, Ownable {
             cleanliness: 80,
             health: 100,
             lastInteraction: block.timestamp,
-            birthTime: block.timestamp
+            birthTime: block.timestamp,
+            body: _body,
+            ear: _ear,
+            face: _face
         });
 
         emit PetMinted(tokenId, _name, msg.sender);
@@ -117,6 +120,29 @@ contract Tamagotchi is ERC721Enumerable, Ownable {
         pet.lastInteraction = block.timestamp;
 
         emit PetInteracted(_tokenId, "clean", pet.hunger, pet.happiness, pet.cleanliness);
+    }
+
+    function getFullPet(uint256 _tokenId) public view returns (
+        string memory name,
+        uint256 hunger,
+        uint256 happiness,
+        uint256 cleanliness,
+        uint256 health,
+        uint8 body,
+        uint8 ear,
+        uint8 face
+    ) {
+        Pet storage pet = pets[_tokenId];
+        (hunger, happiness, cleanliness, health) = getPetStats(_tokenId);
+        name = pet.name;
+        body = pet.body;
+        ear = pet.ear;
+        face = pet.face;
+    }
+
+    function getPetIdByOwner(address _owner) public view returns (uint256) {
+        require(balanceOf(_owner) > 0, "No pet found");
+        return tokenOfOwnerByIndex(_owner, 0);
     }
 
     function _clamp(uint256 _val) internal pure returns (uint256) {

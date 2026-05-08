@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useWallet } from "@/context/WalletProvider";
-import { ShufflePetImage } from "@/app/home/Pet/ShufflePetImage";
+import { ShufflePetImage } from "../Pet/ShufflePetImage";
 import { TAMAGOTCHI_CONTRACT_ADDRESS } from "@/utils/const";
 import { TAMAGOTCHI_ABI } from "@/utils/abi";
 import { ethers } from "ethers";

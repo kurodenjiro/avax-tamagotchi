@@ -1,9 +1,8 @@
 "use client";
 
 import { useWallet } from "@/context/WalletProvider";
-import { cn } from "@/utils/styling";
 
-const buttonStyles = "px-4 py-2 bg-blue-600 text-white rounded font-bold transition-all hover:bg-blue-700 active:translate-y-0.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] border-2 border-black";
+const buttonStyles = "px-4 py-2 bg-blue-600 text-white rounded font-bold transition-all hover:bg-blue-700 active:translate-y-0.5 shadow-[2px_2px_0_0_rgba(0,0,0,1)] border-2 border-black";
 
 export const WalletButtons = () => {
   const { connected, disconnect, connect, connecting, account } = useWallet();
@@ -15,7 +14,7 @@ export const WalletButtons = () => {
           {account.slice(0, 6)}...{account.slice(-4)}
         </span>
         <button
-          className={cn(buttonStyles, "bg-red-500 hover:bg-red-600")}
+          className={`${buttonStyles} bg-red-500 hover:bg-red-600`}
           onClick={disconnect}
         >
           Disconnect
@@ -26,7 +25,7 @@ export const WalletButtons = () => {
 
   return (
     <button
-      className={cn(buttonStyles, connecting && "opacity-50 cursor-not-allowed")}
+      className={`${buttonStyles} ${connecting ? "opacity-50 cursor-not-allowed" : ""}`}
       onClick={connect}
       disabled={connecting}
     >

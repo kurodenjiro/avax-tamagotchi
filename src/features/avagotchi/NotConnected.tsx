@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useTypingEffect } from "@/utils/useTypingEffect";
+import { useTypingEffect } from "@/hooks/useTypingEffect";
 import { ShufflePetImage } from "./Pet/ShufflePetImage";
 import { useWallet } from "@/context/WalletProvider";
 

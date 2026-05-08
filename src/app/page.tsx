@@ -1,5 +1,7 @@
+"use client";
+
 import dynamic from "next/dynamic";
-import { Body } from "./home/Body";
+import { Body } from "@/features/avagotchi/Body";
 
 export default function Home() {
   return (

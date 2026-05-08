@@ -1,6 +1,6 @@
 "use client";
 
-import { useTypingEffect } from "@/utils/useTypingEffect";
+import { useTypingEffect } from "@/hooks/useTypingEffect";
 import { Pet } from ".";
 
 export interface SummaryProps {

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "cd blockchain && npx hardhat ignition deploy ./ignition/modules/Tamagotchi.js --network avax_custom"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

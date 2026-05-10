@@ -24,8 +24,8 @@ module.exports = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
     avax_custom: {
-      url: "https://nodes-prod.18.182.4.86.sslip.io/ext/bc/ZdfdpWpwtAuSgAkTv8ZycQTiKuCcybGecfRsyBym9TzZhXWip/rpc",
-      chainId: 333090,
+      url: process.env.RPC_URL || "https://nodes-prod.18.182.4.86.sslip.io/ext/bc/2PyQcV83e7qoCkaGAXVPMTMixfLW3Uxt5eBRiykDUT5EF57MQY/rpc",
+      chainId: parseInt(process.env.CHAIN_ID) || 577706,
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       gasPrice: 2000000000, // 2 gwei
     },

@@ -9,9 +9,6 @@ export function NotConnected() {
   const [petParts, setPetParts] = useState<number[]>([0, 0, 0]);
   const { connect, connecting } = useWallet();
 
-  const text = useTypingEffect(
-    `Welcome to Avagotchi! Connect your wallet to mint your new on-chain pet on the Avalanche Subnet. Feed, play, and clean your new friend to keep them healthy and happy!`
-  );
 
   return (
     <div className="flex flex-col items-center gap-12 p-8 text-center max-w-2xl mx-auto">
@@ -23,9 +20,11 @@ export function NotConnected() {
         <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-yellow-400 border-4 border-black px-6 py-2 rounded-full font-black text-xl uppercase tracking-tighter shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           Welcome
         </div>
-        <p className="text-xl font-bold leading-relaxed mt-4">
-          {text}
-        </p>
+        <div className="flex flex-col gap-4 text-xl font-bold leading-relaxed mt-4">
+          <p>Welcome to Avagotchi!</p>
+          <p className="text-gray-600 text-lg">Connect your wallet to mint your new on-chain pet on the Avalanche Subnet.</p>
+          <p className="text-blue-600">Feed, play, and clean your new friend to keep them healthy and happy!</p>
+        </div>
       </div>
 
       <button

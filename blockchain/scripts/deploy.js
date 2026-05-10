@@ -1,12 +1,20 @@
 const hre = require("hardhat");
 
 async function main() {
-  const Tamagotchi = await hre.ethers.getContractFactory("Tamagotchi");
-  const tamagotchi = await Tamagotchi.deploy();
+  const contractName = process.env.CONTRACT_NAME || "Tamagotchi";
+  console.log(`Deploying ${contractName}...`);
+  
+  const Factory = await hre.ethers.getContractFactory(contractName);
+  const contract = await Factory.deploy();
 
-  await tamagotchi.waitForDeployment();
+  await contract.waitForDeployment();
+  const address = await contract.getAddress();
+  const tx = contract.deploymentTransaction();
 
-  console.log("Tamagotchi deployed to:", await tamagotchi.getAddress());
+  console.log(`${contractName} deployed to:`, address);
+  if (tx) {
+    console.log(`Transaction hash: ${tx.hash}`);
+  }
 }
 
 main().catch((error) => {

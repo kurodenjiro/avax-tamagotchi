@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  turbopack: {},
+  turbopack: {
+    root: ".",
+  },
   webpack: (config) => {
     config.externals.push({
       bufferutil: "bufferutil",

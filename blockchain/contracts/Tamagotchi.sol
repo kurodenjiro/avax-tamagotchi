@@ -19,6 +19,7 @@ contract Tamagotchi is ERC721Enumerable, Ownable {
     }
 
     mapping(uint256 => Pet) public pets;
+    mapping(address => uint256) public ownerPet; // Direct mapping for reliability
     uint256 public nextTokenId;
 
     // Configurable settings (can be customized)
@@ -47,6 +48,7 @@ contract Tamagotchi is ERC721Enumerable, Ownable {
             ear: _ear,
             face: _face
         });
+        ownerPet[msg.sender] = tokenId;
 
         emit PetMinted(tokenId, _name, msg.sender);
     }
@@ -58,7 +60,8 @@ contract Tamagotchi is ERC721Enumerable, Ownable {
         uint256 health
     ) {
         Pet storage pet = pets[_tokenId];
-        uint256 timePassed = block.timestamp - pet.lastInteraction;
+        // Protect against timestamp underflow
+        uint256 timePassed = block.timestamp > pet.lastInteraction ? block.timestamp - pet.lastInteraction : 0;
         uint256 hoursPassed = timePassed / 3600;
 
         hunger = _calculateDecay(pet.hunger, hoursPassed, hungerDecayRate);
@@ -142,7 +145,7 @@ contract Tamagotchi is ERC721Enumerable, Ownable {
 
     function getPetIdByOwner(address _owner) public view returns (uint256) {
         require(balanceOf(_owner) > 0, "No pet found");
-        return tokenOfOwnerByIndex(_owner, 0);
+        return ownerPet[_owner];
     }
 
     function _clamp(uint256 _val) internal pure returns (uint256) {

@@ -45,20 +45,31 @@ export function Actions({
   };
 
   const handleAction = async (action: Action) => {
-    if (!account || !signer || !provider) return;
+    if (!account || !signer || !provider || !TAMAGOTCHI_CONTRACT_ADDRESS) {
+      console.error("Missing wallet or contract configuration");
+      return;
+    }
 
     setTransactionInProgress(true);
     try {
       const contract = new ethers.Contract(TAMAGOTCHI_CONTRACT_ADDRESS, TAMAGOTCHI_ABI, signer);
+      
+      console.log(`Getting pet ID for ${account}...`);
       const petId = await contract.getPetIdByOwner(account);
+      console.log(`Executing ${action} for pet ${petId}...`);
       
       let tx;
-      if (action === "feed") tx = await contract.feed(petId);
-      else if (action === "play") tx = await contract.play(petId);
-      else if (action === "clean") tx = await contract.clean(petId);
+      const options = { gasLimit: 200000 }; // Explicit gas limit for reliability on subnets
+
+      if (action === "feed") tx = await contract.feed(petId, options);
+      else if (action === "play") tx = await contract.play(petId, options);
+      else if (action === "clean") tx = await contract.clean(petId, options);
       
       if (tx) {
+        console.log(`Transaction sent: ${tx.hash}`);
         await tx.wait();
+        console.log(`${action} successful!`);
+        
         // Refresh pet stats
         const data = await contract.getFullPet(petId);
         setPet({
@@ -72,6 +83,7 @@ export function Actions({
       }
     } catch (error: any) {
       console.error(`Error during ${action}:`, error);
+      alert(`Transaction failed: ${error.reason || error.message || "Unknown error"}`);
     } finally {
       setTransactionInProgress(false);
     }

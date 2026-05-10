@@ -1,101 +1,48 @@
-# Avagotchi: On-Chain Tamagotchi Demo
+# Avagotchi & FlipCoin Starter
 
-Avagotchi is a premium blockchain-based Tamagotchi game built on the **Avalanche** network. It features unique NFT pets with real-time statistical decay and on-chain interactions.
+<p align="center">
+  <img src="public/icon.png" width="300" alt="Avagotchi Mascot">
+</p>
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Solidity](https://img.shields.io/badge/solidity-%5E0.8.24-lightgrey)
-![React](https://img.shields.io/badge/react-19-blue)
-![Vite](https://img.shields.io/badge/vite-6-purple)
+🚀 A robust, automated starter kit for building on-chain applications on Avalanche Subnets.
 
-## ✨ Features
+## Features
 
-- **Pet NFTs (ERC721)**: Every pet is a unique token owned by the user.
-- **On-Chain Lifecycle**: Hunger, Happiness, Cleanliness, and Health are tracked directly on the blockchain.
-- **Real-Time Decay**: Pet stats decay based on block timestamps (e.g., hunger drops 5 points per hour).
-- **Interactive Gameplay**: Feed, play, and clean your pet through the dApp UI.
-- **Premium Design**: A glassmorphism-inspired UI built with Framer Motion for smooth animations and a premium feel.
-- **Configurable Mechanics**: Centralized configuration for easy customization of decay rates and recovery values.
+- 🏗 **One-Command Setup**: Bootstrap a full-stack dApp in minutes using `npx create-starter-avax`.
+- 🦊 **Avagotchi**: A fully functional on-chain pet game (ERC721) with hunger, happiness, and health mechanics.
+- 🪙 **FlipCoin**: A provably fair (pseudo-random) coin flip betting game.
+- ⚡ **Avalanche Subnet Optimized**: Pre-configured for custom RPCs, Chain IDs, and block explorers.
+- 🎨 **NES.css Aesthetics**: A charming 8-bit retro UI design.
+- 🛠 **Hardhat Integration**: Script-based deployment with automatic frontend environment configuration.
 
-## 🛠 Tech Stack
+## Getting Started
 
-- **Smart Contracts**: Solidity ^0.8.24, OpenZeppelin 5.0
-- **Blockchain Environment**: Hardhat, Hardhat Ignition
-- **Frontend**: React 19, TypeScript, Vite
-- **Web3 Library**: Ethers.js v6
-- **UI & Animations**: Lucide-React, Framer Motion, Vanilla CSS (Premium Design System)
+1. **Bootstrap your project**:
+   ```bash
+   npx create-starter-avax
+   ```
 
-## 📁 Project Structure
+2. **Follow the CLI prompts** to select your project type (Avagotchi or FlipCoin) and provide your Subnet RPC details.
 
-```
-avagotchi/
-├── blockchain/          # Smart contract development (Hardhat)
-│   ├── contracts/       # Solidity source files
-│   ├── ignition/        # Deployment modules
-│   └── test/            # Contract unit tests
-├── src/                 # Frontend source code (React)
-│   ├── abi.ts           # Contract ABI
-│   ├── config.ts        # Game mechanics configuration
-│   └── App.tsx          # Main application logic
-├── public/              # Static assets
-└── package.json         # Frontend dependencies and scripts
-```
+3. **Fund your project wallet** (displayed in the CLI) to cover deployment costs.
 
-## 🚀 Getting Started
+4. **Launch**: The CLI will automatically deploy the contract, install dependencies, and open the browser at `http://localhost:3000`.
 
-### Prerequisites
+## Automated Pipeline
 
-- Node.js (v22.13.0 or later recommended)
-- MetaMask or any Web3 wallet
-- Avalanche Fuji Testnet AVAX (for testnet deployment)
+The `create-starter-avax` tool handles:
+- ✅ Wallet generation & funding verification
+- ✅ Smart contract compilation & deployment
+- ✅ Frontend `.env` configuration
+- ✅ `npm install` for both blockchain and frontend
+- ✅ Automatic dev server launch
 
-### 1. Blockchain Setup
+## Technology Stack
 
-Navigate to the `blockchain` directory and install dependencies:
+- **Frontend**: Next.js (App Router), Tailwind CSS, NES.css
+- **Blockchain**: Solidity, Hardhat, Ethers.js v6
+- **Subnet Support**: Fully compatible with Avalanche Subnets (Custom RPC, Chain ID)
 
-```bash
-cd blockchain
-npm install
-```
+## License
 
-Start a local Hardhat node:
-
-```bash
-npx hardhat node
-```
-
-In a new terminal, deploy the contract to the local network:
-
-```bash
-npx hardhat ignition deploy ./ignition/modules/Tamagotchi.js --network localhost
-```
-
-### 2. Frontend Setup
-
-Install dependencies at the root directory:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-### 3. Configure Contract Address
-
-Update the `CONTRACT_ADDRESS` constant in `src/App.tsx` with the address of your deployed contract.
-
-## 🧪 Testing
-
-To run the smart contract tests:
-
-```bash
-cd blockchain
-npx hardhat test
-```
-
-## 📄 License
-
-This project is licensed under the MIT License.
+MIT

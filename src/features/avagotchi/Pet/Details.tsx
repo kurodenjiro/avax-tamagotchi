@@ -31,14 +31,14 @@ export function Details({ pet, setPet }: DetailsProps) {
 
   return (
     <div className="flex flex-col gap-6 bg-white border-2 border-black rounded-lg p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-6">
         {statItem("Hunger", pet.hunger, "heart")}
         {statItem("Happiness", pet.happiness, "star")}
         {statItem("Cleanliness", pet.cleanliness, "lightning")}
         {statItem("Health", pet.health, "heart")}
       </div>
 
-      <div className="flex flex-col gap-4 pt-4 border-t-2 border-dashed border-gray-200">
+      <div className="flex flex-col gap-6 pt-6 border-t-2 border-dashed border-gray-200">
         <div className="flex flex-col gap-1">
           <label className="text-xs font-bold text-gray-500 uppercase">Pet Name</label>
           <div className="p-2 border-2 border-black rounded bg-gray-50 font-bold">

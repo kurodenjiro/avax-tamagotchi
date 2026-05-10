@@ -21,12 +21,12 @@ export function FoodBar({
 
   return (
     <div className="flex flex-wrap gap-1">
-        {range(fullIcons).map((i) => (
-        <img key={i} className='nes-avatar'src='/assets/full_apple.png' style={{imageRendering: "pixelated"}} />
-        ))}
-        {range(emptyIcons).map((i) => (
-        <img key={i} className='nes-avatar'src='/assets/empty_apple.png' style={{imageRendering: "pixelated"}} />
-        ))}
+      {range(fullIcons).map((i) => (
+        <img key={i} className='nes-avatar' src='/assets/full_apple.png' style={{ imageRendering: "pixelated" }} />
+      ))}
+      {range(emptyIcons).map((i) => (
+        <img key={i} className='nes-avatar' src='/assets/empty_apple.png' style={{ imageRendering: "pixelated" }} />
+      ))}
     </div>
   );
 }
